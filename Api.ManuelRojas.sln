@@ -15,17 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05. Transversal", "05. Tran
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06. Test", "06. Test", "{3E0AB4E0-F788-4F0C-BAB1-11711A1A9672}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{E7A26133-E826-4561-AAB7-42576B473E46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{E7A26133-E826-4561-AAB7-42576B473E46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Movements", "Business.Movements\Business.Movements.csproj", "{0B2A79E5-D8A7-4531-B24A-F4E9DE7E298D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Movements", "Business.Movements\Business.Movements.csproj", "{0B2A79E5-D8A7-4531-B24A-F4E9DE7E298D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Movements", "Data.Movements\Data.Movements.csproj", "{C480B7EC-E2F1-46E6-B036-38A30B4CC7F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Movements", "Data.Movements\Data.Movements.csproj", "{C480B7EC-E2F1-46E6-B036-38A30B4CC7F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Balance", "Data.Balance\Data.Balance.csproj", "{8651F564-1F54-4EC4-8AC2-AD6E0EF3B616}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Balance", "Data.Balance\Data.Balance.csproj", "{8651F564-1F54-4EC4-8AC2-AD6E0EF3B616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{126673FC-E8FF-407B-AE79-7C2E4C1E336E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{126673FC-E8FF-407B-AE79-7C2E4C1E336E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transversal.Entities", "Transversal.Entities\Transversal.Entities.csproj", "{6756575E-8138-47EE-A50B-66523809FA34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transversal.Entities", "Transversal.Entities\Transversal.Entities.csproj", "{6756575E-8138-47EE-A50B-66523809FA34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.EntityFramework", "Data.EntityFramework\Data.EntityFramework.csproj", "{9E35E257-1DFF-455A-96B0-06D04C7DB88E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{6756575E-8138-47EE-A50B-66523809FA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6756575E-8138-47EE-A50B-66523809FA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6756575E-8138-47EE-A50B-66523809FA34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E35E257-1DFF-455A-96B0-06D04C7DB88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E35E257-1DFF-455A-96B0-06D04C7DB88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E35E257-1DFF-455A-96B0-06D04C7DB88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E35E257-1DFF-455A-96B0-06D04C7DB88E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{8651F564-1F54-4EC4-8AC2-AD6E0EF3B616} = {961C3AE0-4A99-4BB8-918A-1EB7ABAC4B63}
 		{126673FC-E8FF-407B-AE79-7C2E4C1E336E} = {D77D76AC-F1DA-42B7-9D7D-7620B41AB136}
 		{6756575E-8138-47EE-A50B-66523809FA34} = {E8F3A872-A0FA-4FFC-BA19-055A25503963}
+		{9E35E257-1DFF-455A-96B0-06D04C7DB88E} = {961C3AE0-4A99-4BB8-918A-1EB7ABAC4B63}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C395DDAB-E6F1-4F30-9584-676D343A4715}
