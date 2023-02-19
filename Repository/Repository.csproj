@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Business.Movements\Business.Movements.csproj" />
+    <ProjectReference Include="..\Data.Accounts\Data.Accounts.csproj" />
+    <ProjectReference Include="..\Data.Clients\Data.Clients.csproj" />
+    <ProjectReference Include="..\Data.EntityFramework\Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\Data.Movements\Data.Movements.csproj" />
+    <ProjectReference Include="..\Transversal.Entities\Transversal.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
