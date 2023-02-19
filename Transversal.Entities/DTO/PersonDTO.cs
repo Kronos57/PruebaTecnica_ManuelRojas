@@ -1,6 +1,6 @@
-﻿namespace Transversal.Entities
+﻿namespace Transversal.Entities.DTO
 {
-    public class PersonaDTO
+    public class PersonDTO
     {
         public int IdPersona { get; set; }
 
@@ -16,17 +16,17 @@
 
         public string Telefono { get; set; } = null!;
 
-        public PersonaDTO()
+        public PersonDTO()
         {
 
         }
 
-        public PersonaDTO(int idPersona)
+        public PersonDTO(int idPersona)
         {
             IdPersona = idPersona;
         }
 
-        public PersonaDTO(int idPersona, string nombre, string genero, string edad, string identificacion, string direccion, string telefono)
+        public PersonDTO(int idPersona, string nombre, string genero, string edad, string identificacion, string direccion, string telefono)
         {
             IdPersona = idPersona;
             Nombre = nombre;

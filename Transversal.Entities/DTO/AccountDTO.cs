@@ -1,6 +1,6 @@
-﻿namespace Transversal.Entities
+﻿namespace Transversal.Entities.DTO
 {
-    public class CuentaDTO
+    public class AccountDTO
     {
         public int IdCuenta { get; set; }
 
@@ -12,17 +12,17 @@
 
         public string? Estado { get; set; }
 
-        public CuentaDTO()
+        public AccountDTO()
         {
 
         }
 
-        public CuentaDTO(int idCuenta)
+        public AccountDTO(int idCuenta)
         {
             IdCuenta = idCuenta;
         }
 
-        public CuentaDTO(int idCuenta, string numeroCuenta, string tipoCuenta, decimal saldoInicial, string estado)
+        public AccountDTO(int idCuenta, string numeroCuenta, string tipoCuenta, decimal saldoInicial, string estado)
         {
             IdCuenta = idCuenta;
             NumeroCuenta = numeroCuenta;

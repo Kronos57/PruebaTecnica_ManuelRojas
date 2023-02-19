@@ -1,6 +1,6 @@
-﻿namespace Transversal.Entities
+﻿namespace Transversal.Entities.DTO
 {
-    public class ClientDTO: PersonaDTO
+    public class ClientDTO : PersonDTO
     {
         public int IdCliente { get; set; }
 
