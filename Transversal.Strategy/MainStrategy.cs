@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Transversal.Entities;
 using Transversal.Exceptions;
 
 namespace Transversal.Strategy
@@ -25,6 +26,25 @@ namespace Transversal.Strategy
         public void SetResult(object result)
         {
             this.result = result;
+            this.State = StateStrategy.Success;
+        }
+
+        public void SetMessageResult(string message)
+        {
+            this.result = message;
+            this.State = StateStrategy.Success;
+        }
+
+        public void SetResponseResult(string message)
+        {
+            TransversalResponseObject response = new TransversalResponseObject
+            {
+                Status = Enum.GetName(typeof(StateStrategy), 2),
+                Message = message,
+                Fecha = DateTime.Now
+            };
+
+            this.result = response;
             this.State = StateStrategy.Success;
         }
 

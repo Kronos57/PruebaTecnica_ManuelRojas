@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Transversal.Entities\Transversal.Entities.csproj" />
     <ProjectReference Include="..\Transversal.Exceptions\Transversal.Exceptions.csproj" />
   </ItemGroup>
 
