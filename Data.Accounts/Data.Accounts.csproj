@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.EntityFramework\Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\Business.Transversal\Business.Transversal.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Transversal.Entities\Transversal.Entities.csproj" />
     <ProjectReference Include="..\Transversal.Strategy\Transversal.Strategy.csproj" />
   </ItemGroup>

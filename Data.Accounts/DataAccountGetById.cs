@@ -6,33 +6,29 @@ using Transversal.Strategy;
 
 namespace Data.Accounts
 {
-    public class DataAccountGetList : DataStrategy
+    public class DataAccountGetById : DataStrategy
     {
-        public DataAccountGetList()
-        {
+        private Int32 id;
 
+        public DataAccountGetById(int id)
+        {
+            this.id = id;
         }
 
         protected override void Process()
         {
-            List<AccountSearchDTO> accounts = new List<AccountSearchDTO>();
-            BusinessUtilsTransversal utils = new BusinessUtilsTransversal(); 
+            BusinessUtilsTransversal utils = new BusinessUtilsTransversal();
 
             using (var context = new ApiRestDbManuelRojasContext())
             {
                 AccountRepository accountRepository = new AccountRepository(context);
 
-                IEnumerable<Cuenta> entityAccounts = accountRepository.GetAll();
+                Cuenta entityAccount = accountRepository.GetById(id);
 
-                foreach (Cuenta entityAccount in entityAccounts)
-                {
-                    accounts.Add(new AccountSearchDTO(entityAccount.IdCuenta, entityAccount.IdCliente, entityAccount.NumeroCuenta,
+                SetResult(new AccountSearchDTO(entityAccount.IdCuenta, entityAccount.IdCliente, entityAccount.NumeroCuenta,
                         utils.GetTipoDeCuenta(entityAccount.IdTipoCuenta), entityAccount.Saldo,
                         utils.GetEstado(entityAccount.Estado)));
-                }
             }
-
-            SetResult(accounts);
         }
     }
 }
