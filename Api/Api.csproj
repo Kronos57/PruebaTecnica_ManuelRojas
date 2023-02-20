@@ -7,16 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Business.Movements\Business.Movements.csproj" />
+    <ProjectReference Include="..\Data.Accounts\Data.Accounts.csproj" />
     <ProjectReference Include="..\Data.EntityFramework\Data.EntityFramework.csproj" />
     <ProjectReference Include="..\Data.Movements\Data.Movements.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\Transversal.Entities\Transversal.Entities.csproj" />
   </ItemGroup>
 
