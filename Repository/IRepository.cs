@@ -7,6 +7,5 @@
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Remove(int id);
-
     }
 }
