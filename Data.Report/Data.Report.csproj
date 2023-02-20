@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Transversal.Entities\Transversal.Entities.csproj" />
-    <ProjectReference Include="..\Transversal.Strategy\Transversal.Strategy.csproj" />
-  </ItemGroup>
-
 </Project>

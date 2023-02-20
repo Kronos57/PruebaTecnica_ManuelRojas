@@ -13,7 +13,7 @@ public partial class Cuenta
 
     public int IdTipoCuenta { get; set; }
 
-    public decimal SaldoInicial { get; set; }
+    public decimal Saldo { get; set; }
 
     public bool Estado { get; set; }
 
