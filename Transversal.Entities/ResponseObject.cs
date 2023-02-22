@@ -1,6 +1,6 @@
 ﻿namespace Transversal.Entities
 {
-    public class TransversalResponseObject
+    public class ResponseObject
     {
         public string? Status { get; set; }
 
@@ -9,12 +9,12 @@
         public DateTime Fecha { get; set; }
 
 
-        public TransversalResponseObject()
+        public ResponseObject()
         {
 
         }
 
-        public TransversalResponseObject(string status, string message, DateTime fecha)
+        public ResponseObject(string status, string message, DateTime fecha)
         {
             Status = status;
             Message = message;

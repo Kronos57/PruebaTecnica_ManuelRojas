@@ -10,7 +10,8 @@
 
         public int IdTipoCuenta { get; set; }
 
-        public decimal Saldo { get; set; }
+        public decimal SaldoInicial { get; set; }
+
 
         public bool Estado { get; set; }
 
@@ -24,13 +25,13 @@
             IdCuenta = idCuenta;
         }
 
-        public AccountDTO(int idCuenta, int idCliente, string numeroCuenta, int idTipoCuenta, decimal saldo, bool estado)
+        public AccountDTO(int idCuenta, int idCliente, string numeroCuenta, int idTipoCuenta, decimal saldoInicial, bool estado)
         {
             IdCuenta = idCuenta;
             IdCliente = idCliente;
             NumeroCuenta = numeroCuenta;
             IdTipoCuenta = idTipoCuenta;
-            Saldo = saldo;
+            SaldoInicial = saldoInicial;
             Estado = estado;
         }
     }

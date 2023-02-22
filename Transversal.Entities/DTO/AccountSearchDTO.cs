@@ -10,7 +10,7 @@
 
         public string? NombreTipoCuenta { get; set; }
 
-        public decimal Saldo { get; set; }
+        public decimal SaldoInicial { get; set; }
 
         public string? NombreEstado { get; set; }
 
@@ -23,24 +23,24 @@
         {
             IdCuenta = idCuenta;
         }
-        public AccountSearchDTO(decimal saldo)
+        public AccountSearchDTO(decimal saldoDisponible)
         {
-            Saldo = saldo;
+            SaldoInicial = saldoDisponible;
         }
 
         public AccountSearchDTO(int idCuenta, decimal saldo)
         {
             IdCuenta = idCuenta;
-            Saldo = saldo;
+            SaldoInicial = saldo;
         }
 
-        public AccountSearchDTO(int idCuenta, int idCliente, string numeroCuenta, string nombreTipoCuenta, decimal saldo, string nombreEstado)
+        public AccountSearchDTO(int idCuenta, int idCliente, string numeroCuenta, string nombreTipoCuenta, decimal saldoInicial, string nombreEstado)
         {
             IdCuenta = idCuenta;
             IdCliente = idCliente;
             NumeroCuenta = numeroCuenta;
             NombreTipoCuenta = nombreTipoCuenta;
-            Saldo = saldo;
+            SaldoInicial = saldoInicial;
             NombreEstado = nombreEstado;
         }
     }

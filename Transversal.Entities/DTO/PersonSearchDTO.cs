@@ -1,41 +1,42 @@
 ﻿namespace Transversal.Entities.DTO
 {
-    public class PersonDTO
+    public class PersonSearchDTO
     {
         public int IdPersona { get; set; }
 
         public string Nombre { get; set; } = null!;
 
-        public int IdTipoIdentificacion { get; set; }
+        public string? NombreTipoIdentificacion { get; set; }
 
         public string? Identificacion { get; set; }
 
-        public int IdGenero { get; set; }
+        public string NombreGenero { get; set; } = null!;
 
-        public string Edad { get; set; } = null!;
+        public string Edad { get; set; } = null!;    
 
         public string Direccion { get; set; } = null!;
 
         public string Telefono { get; set; } = null!;
 
-        public PersonDTO()
+
+        public PersonSearchDTO()
         {
 
         }
 
-        public PersonDTO(int idPersona)
+        public PersonSearchDTO(int idPersona)
         {
             IdPersona = idPersona;
         }
 
-        public PersonDTO(int idPersona, string nombre, int idTipoIdentificacion, int idGenero, string edad, 
-            string identificacion, string direccion, string telefono)
+        public PersonSearchDTO(int idPersona, string nombre, string nombreTipoIdentificacion, string identificacion, 
+            string nombreGenero, string edad, string direccion, string telefono)
         {
             IdPersona = idPersona;
             Nombre = nombre;
-            IdTipoIdentificacion = idTipoIdentificacion;
+            NombreTipoIdentificacion = nombreTipoIdentificacion;
             Identificacion = identificacion;
-            IdGenero = idGenero;
+            NombreGenero = nombreGenero;
             Edad = edad;
             Direccion = direccion;
             Telefono = telefono;

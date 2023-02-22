@@ -1,12 +1,12 @@
 ﻿namespace Transversal.Entities.DTO
 {
-    public class MovementDTO
+    public class MovementSearchDTO
     {
         public int IdMovimiento { get; set; }
 
         public int IdCuenta { get; set; }
 
-        public int IdTipoMovimiento { get; set; }
+        public string? NombreTipoMovimiento { get; set; }
 
         public decimal Valor { get; set; }
 
@@ -14,29 +14,29 @@
 
         public decimal SaldoDisponible { get; set; }
 
-        public bool Estado { get; set; }
+        public string? NombreEstado { get; set; }
 
 
-        public MovementDTO()
+        public MovementSearchDTO()
         {
 
         }
 
-        public MovementDTO(int idMovimiento)
+        public MovementSearchDTO(int idMovimiento)
         {
             IdMovimiento = idMovimiento;
         }
 
-        public MovementDTO(int idMovimiento, int idCuenta, int idTipoMovimiento, decimal valor, DateTime fechaMovimiento,
-            decimal saldoDisponible, bool estado)
+        public MovementSearchDTO(int idMovimiento, int idCuenta, string nombreTipoMovimiento, decimal valor, 
+            DateTime fechaMovimiento, decimal saldoDisponible, string nombreEstado)
         {
             IdMovimiento = idMovimiento;
             IdCuenta = idCuenta;
-            IdTipoMovimiento = idTipoMovimiento;
+            NombreTipoMovimiento = nombreTipoMovimiento;
             Valor = valor;
             FechaMovimiento = fechaMovimiento;
             SaldoDisponible = saldoDisponible;
-            Estado = estado;
+            NombreEstado = nombreEstado;
         }
     }
 }

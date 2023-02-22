@@ -6,7 +6,7 @@
 
         public string? Contrasenia { get; set; }
 
-        public string? Estado { get; set; }
+        public bool Estado { get; set; }
 
         public ClientDTO()
         {
@@ -18,11 +18,28 @@
             IdCliente = idCliente;
         }
 
-        public ClientDTO(int idCliente, string contrasenia, string estado)
+        public ClientDTO(int idCliente, string contrasenia, bool estado)
         {
             IdCliente = idCliente;
             Contrasenia = contrasenia;
             Estado = estado;
+        }
+
+        public ClientDTO(int idCliente, string contrasenia, bool estado, int idPersona, string nombre,
+              int idTipoIdentificacion, string identificacion, int idGenero, string edad, string direccion, string telefono)
+        {
+            IdCliente = idCliente;
+            Contrasenia = contrasenia;
+            Estado = estado;
+
+            IdPersona = idPersona;
+            Nombre = nombre;
+            IdTipoIdentificacion = idTipoIdentificacion;
+            Identificacion = identificacion;
+            IdGenero = idGenero;
+            Edad = edad;
+            Direccion = direccion;
+            Telefono = telefono;
         }
     }
 }
