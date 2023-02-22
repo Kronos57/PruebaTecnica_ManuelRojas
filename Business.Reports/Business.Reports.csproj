@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data.Accounts\Data.Accounts.csproj" />
+    <ProjectReference Include="..\Data.Clients\Data.Clients.csproj" />
     <ProjectReference Include="..\Data.Movements\Data.Movements.csproj" />
     <ProjectReference Include="..\Transversal.Entities\Transversal.Entities.csproj" />
+    <ProjectReference Include="..\Transversal.Strategy\Transversal.Strategy.csproj" />
   </ItemGroup>
 
 </Project>
