@@ -21,8 +21,6 @@ public partial class Persona
 
     public string Telefono { get; set; } = null!;
 
-    public bool Estado { get; set; }
-
     public virtual ICollection<Cliente> Clientes { get; } = new List<Cliente>();
 
     public virtual ParTipoGenero IdGeneroNavigation { get; set; } = null!;

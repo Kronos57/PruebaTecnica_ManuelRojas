@@ -15,7 +15,7 @@ public partial class Movimiento
 
     public DateTime FechaMovimiento { get; set; }
 
-    public decimal Saldo { get; set; }
+    public decimal SaldoDisponible { get; set; }
 
     public bool Estado { get; set; }
 

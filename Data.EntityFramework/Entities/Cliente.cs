@@ -9,7 +9,7 @@ public partial class Cliente
 
     public int IdPersona { get; set; }
 
-    public byte[] Contrasenia { get; set; } = null!;
+    public string Contrasenia { get; set; } = null!;
 
     public bool Estado { get; set; }
 
