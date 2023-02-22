@@ -2,6 +2,7 @@
 using Repository;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
+using static Transversal.Entities.ConstantMessages;
 
 namespace Data.Accounts
 {
@@ -25,12 +26,12 @@ namespace Data.Accounts
                     IdCliente = accountDTO.IdCliente,
                     NumeroCuenta= accountDTO.NumeroCuenta,
                     IdTipoCuenta = accountDTO.IdTipoCuenta,
-                    Saldo = accountDTO.Saldo,
+                    SaldoInicial = accountDTO.SaldoInicial,
                     Estado= accountDTO.Estado
                 };
 
                 accountRepository.Add(entityCuenta);
-                SetResponseResult("Cuenta Creada Correctamente");
+                SetResponseResult(ACCOUNT_MESSAGES.CUENTA_CREADA);
             }
         }
     }

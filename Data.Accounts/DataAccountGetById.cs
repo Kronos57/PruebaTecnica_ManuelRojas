@@ -3,12 +3,13 @@ using Data.EntityFramework.Entities;
 using Repository;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
+using static Transversal.Entities.ConstantMessages;
 
 namespace Data.Accounts
 {
     public class DataAccountGetById : DataStrategy
     {
-        private Int32 id;
+        private int id;
 
         public DataAccountGetById(int id)
         {
@@ -23,11 +24,17 @@ namespace Data.Accounts
             {
                 AccountRepository accountRepository = new AccountRepository(context);
 
-                Cuenta entityAccount = accountRepository.GetById(id);
+                Cuenta entityCuenta = accountRepository.GetById(id);
 
-                SetResult(new AccountSearchDTO(entityAccount.IdCuenta, entityAccount.IdCliente, entityAccount.NumeroCuenta,
-                        utils.GetTipoDeCuenta(entityAccount.IdTipoCuenta), entityAccount.Saldo,
-                        utils.GetEstado(entityAccount.Estado)));
+                if (entityCuenta != null)
+                {
+                    SetResult(new AccountSearchDTO(entityCuenta.IdCuenta, entityCuenta.IdCliente, entityCuenta.NumeroCuenta,
+                        utils.GetTipoDeCuenta(entityCuenta.IdTipoCuenta), entityCuenta.SaldoInicial, utils.GetEstado(entityCuenta.Estado)));
+                }
+                else
+                {
+                    SetException(EXCEPTION_MESSAGES.CUENTA_NO_EXISTE);
+                }
             }
         }
     }

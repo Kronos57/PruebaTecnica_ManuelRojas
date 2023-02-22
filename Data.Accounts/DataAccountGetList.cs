@@ -8,15 +8,12 @@ namespace Data.Accounts
 {
     public class DataAccountGetList : DataStrategy
     {
-        public DataAccountGetList()
-        {
-
-        }
+        public DataAccountGetList() { }
 
         protected override void Process()
         {
             List<AccountSearchDTO> accounts = new List<AccountSearchDTO>();
-            BusinessUtilsTransversal utils = new BusinessUtilsTransversal(); 
+            BusinessUtilsTransversal utils = new BusinessUtilsTransversal();
 
             using (var context = new ApiRestDbManuelRojasContext())
             {
@@ -27,8 +24,7 @@ namespace Data.Accounts
                 foreach (Cuenta entityAccount in entityAccounts)
                 {
                     accounts.Add(new AccountSearchDTO(entityAccount.IdCuenta, entityAccount.IdCliente, entityAccount.NumeroCuenta,
-                        utils.GetTipoDeCuenta(entityAccount.IdTipoCuenta), entityAccount.Saldo,
-                        utils.GetEstado(entityAccount.Estado)));
+                        utils.GetTipoDeCuenta(entityAccount.IdTipoCuenta), entityAccount.SaldoInicial, utils.GetEstado(entityAccount.Estado)));
                 }
             }
 
