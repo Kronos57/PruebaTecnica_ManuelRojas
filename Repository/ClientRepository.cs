@@ -1,9 +1,5 @@
 ﻿using Data.EntityFramework.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -18,27 +14,38 @@ namespace Repository
 
         public void Add(Cliente entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Added;
+            _dbContext.Clientes.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         public IEnumerable<Cliente> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Clientes.ToList();
         }
 
         public Cliente GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Clientes.Find(id);
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            Cliente? cliente = _dbContext.Clientes.Find(id);
+
+            if (cliente != null)
+            {
+                _dbContext.Entry(cliente).State = EntityState.Deleted;
+                _dbContext.Clientes.Remove(cliente);
+                _dbContext.SaveChanges();
+            }
         }
 
         public void Update(Cliente entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Clientes.Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

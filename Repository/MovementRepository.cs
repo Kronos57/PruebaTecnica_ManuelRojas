@@ -1,4 +1,5 @@
 ﻿using Data.EntityFramework.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -13,27 +14,38 @@ namespace Repository
 
         public void Add(Movimiento entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Added;
+            _dbContext.Movimientos.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         public IEnumerable<Movimiento> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Movimientos.ToList();
         }
 
         public Movimiento GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Movimientos.Find(id);
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            Movimiento? movimiento = _dbContext.Movimientos.Find(id);
+
+            if (movimiento != null)
+            {
+                _dbContext.Entry(movimiento).State = EntityState.Deleted;
+                _dbContext.Movimientos.Remove(movimiento);
+                _dbContext.SaveChanges();
+            }
         }
 
         public void Update(Movimiento entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Movimientos.Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }
