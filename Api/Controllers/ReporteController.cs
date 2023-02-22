@@ -10,7 +10,7 @@ namespace Api.Controllers
     [ApiController]
     public class ReporteController : ControllerBase
     {
-        [HttpGet("GetReportAccountStatus")]
+        [HttpPost("GetReportAccountStatus")]
         public ActionResult<IEnumerable<AccountSearchDTO>> GetReportAccountStatus(AccountStatusRequest accountStatusRequest)
         {
             BusinessReportAccountStatus businessReportAccountStatus = new BusinessReportAccountStatus(accountStatusRequest); 
