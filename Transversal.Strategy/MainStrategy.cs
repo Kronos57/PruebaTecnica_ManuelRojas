@@ -37,7 +37,7 @@ namespace Transversal.Strategy
 
         public void SetResponseResult(string message)
         {
-            TransversalResponseObject response = new TransversalResponseObject
+            ResponseObject response = new ResponseObject
             {
                 Status = Enum.GetName(typeof(StateStrategy), 2),
                 Message = message,
