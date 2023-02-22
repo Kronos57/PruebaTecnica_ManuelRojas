@@ -40,7 +40,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("Create")]
-        public ActionResult<IEnumerable<AccountSearchDTO>> Create(AccountDTO accountDTO)
+        public ActionResult Create(AccountDTO accountDTO)
         {
             DataAccountCreate dataAccountCreate = new DataAccountCreate(accountDTO);
 
@@ -55,7 +55,7 @@ namespace Api.Controllers
         }
 
         [HttpPut("Update")]
-        public ActionResult<IEnumerable<AccountSearchDTO>> Update(AccountDTO accountDTO)
+        public ActionResult Update(AccountDTO accountDTO)
         {
             DataAccountUpdate dataAccountUpdate = new DataAccountUpdate(accountDTO);
 
@@ -69,8 +69,8 @@ namespace Api.Controllers
             }
         }
 
-        [HttpDelete("Delete")]
-        public ActionResult<IEnumerable<AccountSearchDTO>> Delete(int id)
+        [HttpDelete("DeleteById")]
+        public ActionResult Delete(int id)
         {
             DataAccountDelete dataAccountDelete = new DataAccountDelete(id);
 
