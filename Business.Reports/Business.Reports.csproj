@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Data.Accounts\Data.Accounts.csproj" />
     <ProjectReference Include="..\Data.Clients\Data.Clients.csproj" />
     <ProjectReference Include="..\Data.Movements\Data.Movements.csproj" />
