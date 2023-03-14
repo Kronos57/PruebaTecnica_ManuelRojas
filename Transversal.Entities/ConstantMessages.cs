@@ -5,15 +5,20 @@
         public static class EXCEPTION_MESSAGES
         {
             public const string CUENTA_NO_EXISTE = "La Cuenta no existe";
+            public const string CUENTA_INACTIVA = "La Cuenta se encuentra Inactiva";
             public const string CLIENTE_NO_EXISTE = "El Cliente no existe";
             public const string PERSONA_NO_EXISTE = "La Persona no existe";
             public const string MOVIMIENTO_NO_EXISTE = "El Movimiento no existe";
+
+            public const string SALDO_NO_DISPONIBLE = "No es posible obtener el saldo de su cuenta. Por favor Inténtelo nuevamente";
         }
 
         public static class VALIDATION_MESSAGES
         {
             public const string DEFAULT_VALUE = "0";
-            public const string SALDO_NO_DISPONIBLE = "Saldo no Disponible";
+            public const string SALDO_INSUFICIENTE = "El saldo actual es insuficiente";
+            public const string SALDO_CERO = "El saldo actual de su cuenta es 0";
+            public const string CUPO_DIARIO_SUPERADO = "La operación excede el Cupo Diario permitido";
             public const string ID_CLIENTE_OBLIGATORIO = "Debe indicar un IdCliente Válido";
             public const string FECHA_INICIAL_OBLIGATORIA = "Debe indicar una Fecha Inicial ";
             public const string FECHA_FINAL_OBLIGATORIA = "Debe indicar una Fecha Final";
