@@ -1,5 +1,6 @@
 ﻿using Data.EntityFramework.Entities;
-using Repository;
+using Services;
+using System.Transactions;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
@@ -16,48 +17,53 @@ namespace Data.Clients
 
         protected override void Process()
         {
-            using (var context = new ApiRestDbManuelRojasContext())
+            using (var scope = new TransactionScope())//Nueva transacción
             {
-                ClientRepository clientRepository = new ClientRepository(context);
-                PersonRepository personRepository = new PersonRepository(context);
-
-                Cliente entityCliente = clientRepository.GetById(clientDTO.IdCliente);             
-
-                if (entityCliente != null)
+                using (var context = new ApiRestDbManuelRojasContext())
                 {
-                    //Tabla Cliente
-                    entityCliente.IdCliente = clientDTO.IdCliente;
-                    entityCliente.Contrasenia = clientDTO.Contrasenia != null? clientDTO.Contrasenia : entityCliente.Contrasenia;
-                    entityCliente.Estado = clientDTO.Estado;
+                    ClientRepositoryService clientRepository = new ClientRepositoryService(context);
+                    PersonRepositoryService personRepository = new PersonRepositoryService(context);
 
-                    //Tabla Persona
-                    Persona entityPersona = personRepository.GetById(entityCliente.IdPersona);
+                    Cliente entityCliente = clientRepository.GetById(clientDTO.IdCliente);
 
-                    if (entityPersona != null) 
+                    if (entityCliente != null)
                     {
-                        entityPersona.Nombre = clientDTO.Nombre;
-                        entityPersona.IdTipoIdentificacion = clientDTO.IdTipoIdentificacion;
-                        entityPersona.Identificacion = clientDTO.Identificacion != null ? clientDTO.Identificacion: entityPersona.Identificacion;
-                        entityPersona.IdGenero = clientDTO.IdGenero;
-                        entityPersona.Edad = clientDTO.Edad;
-                        entityPersona.Direccion = clientDTO.Direccion;
-                        entityPersona.Telefono = clientDTO.Telefono;
+                        //Tabla Cliente
+                        entityCliente.IdCliente = clientDTO.IdCliente;
+                        entityCliente.Contrasenia = clientDTO.Contrasenia != null ? clientDTO.Contrasenia : entityCliente.Contrasenia;
+                        entityCliente.Estado = clientDTO.Estado;
 
-                        personRepository.Update(entityPersona);
+                        //Tabla Persona
+                        Persona entityPersona = personRepository.GetById(entityCliente.IdPersona);
+
+                        if (entityPersona != null)
+                        {
+                            entityPersona.Nombre = clientDTO.Nombre;
+                            entityPersona.IdTipoIdentificacion = clientDTO.IdTipoIdentificacion;
+                            entityPersona.Identificacion = clientDTO.Identificacion != null ? clientDTO.Identificacion : entityPersona.Identificacion;
+                            entityPersona.IdGenero = clientDTO.IdGenero;
+                            entityPersona.Edad = clientDTO.Edad;
+                            entityPersona.Direccion = clientDTO.Direccion;
+                            entityPersona.Telefono = clientDTO.Telefono;
+
+                            personRepository.Update(entityPersona);
+                        }
+                        else
+                        {
+                            SetException(EXCEPTION_MESSAGES.PERSONA_NO_EXISTE);
+                            return;
+                        }
+
+                        clientRepository.Update(entityCliente);
+                        SetResponseResult(CLIENT_MESSAGES.CLIENTE_ACTUALIZADO);
                     }
                     else
                     {
-                        SetException(EXCEPTION_MESSAGES.PERSONA_NO_EXISTE);
-                        return;
+                        SetException(EXCEPTION_MESSAGES.CLIENTE_NO_EXISTE);
                     }
+                }
 
-                    clientRepository.Update(entityCliente);              
-                    SetResponseResult(CLIENT_MESSAGES.CLIENTE_ACTUALIZADO);
-                }
-                else
-                {
-                    SetException(EXCEPTION_MESSAGES.CLIENTE_NO_EXISTE);
-                }
+                scope.Complete();
             }
         }
     }

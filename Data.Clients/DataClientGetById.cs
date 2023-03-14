@@ -1,6 +1,6 @@
 ﻿using Business.Transversal;
 using Data.EntityFramework.Entities;
-using Repository;
+using Services;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
@@ -21,8 +21,8 @@ namespace Data.Clients
 
             using (var context = new ApiRestDbManuelRojasContext())
             {
-                ClientRepository clientRepository = new ClientRepository(context);
-                PersonRepository personRepository = new PersonRepository(context);
+                ClientRepositoryService clientRepository = new ClientRepositoryService(context);
+                PersonRepositoryService personRepository = new PersonRepositoryService(context);
 
                 Cliente entityClient = clientRepository.GetById(id);
 

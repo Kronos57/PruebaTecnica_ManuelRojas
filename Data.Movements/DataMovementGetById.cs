@@ -1,6 +1,6 @@
 ﻿using Business.Transversal;
 using Data.EntityFramework.Entities;
-using Repository;
+using Services;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
@@ -22,7 +22,7 @@ namespace Data.Movements
 
             using (var context = new ApiRestDbManuelRojasContext())
             {
-                MovementRepository movementRepository = new MovementRepository(context);
+                MovementRepositoryService movementRepository = new MovementRepositoryService(context);
 
                 Movimiento entityMovimiento = movementRepository.GetById(id);
 

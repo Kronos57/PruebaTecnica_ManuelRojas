@@ -1,5 +1,6 @@
 ﻿using Data.EntityFramework.Entities;
-using Repository;
+using Services;
+using System.Transactions;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
 
@@ -15,27 +16,33 @@ namespace Data.Clients
 
         protected override void Process()
         {
-            using (var context = new ApiRestDbManuelRojasContext())
+            using (var scope = new TransactionScope())//Nueva transacción
             {
-                ClientRepository clientRepository = new ClientRepository(context);
 
-                Cliente entityCliente = clientRepository.GetById(id);
-
-                if (clientRepository != null)
+                using (var context = new ApiRestDbManuelRojasContext())
                 {
-                    //Solo borrado lógico
-                    entityCliente.Estado = false;
-                    clientRepository.Update(entityCliente);
+                    ClientRepositoryService clientRepository = new ClientRepositoryService(context);
 
-                    //Opción para borrado definitivo.
-                    //clientRepository.Remove(entityCliente.IdCliente);
+                    Cliente entityCliente = clientRepository.GetById(id);
 
-                    SetResponseResult(CLIENT_MESSAGES.CLIENTE_ELIMINADO);
+                    if (clientRepository != null)
+                    {
+                        //Solo borrado lógico
+                        entityCliente.Estado = false;
+                        clientRepository.Update(entityCliente);
+
+                        //Opción para borrado definitivo.
+                        //clientRepository.Remove(entityCliente.IdCliente);
+
+                        SetResponseResult(CLIENT_MESSAGES.CLIENTE_ELIMINADO);
+                    }
+                    else
+                    {
+                        SetException(EXCEPTION_MESSAGES.CLIENTE_NO_EXISTE);
+                    }
                 }
-                else
-                {
-                    SetException(EXCEPTION_MESSAGES.CLIENTE_NO_EXISTE);
-                }
+
+                scope.Complete();
             }
         }
     }

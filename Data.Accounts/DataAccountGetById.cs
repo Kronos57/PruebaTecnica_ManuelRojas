@@ -1,6 +1,6 @@
 ﻿using Business.Transversal;
 using Data.EntityFramework.Entities;
-using Repository;
+using Services;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
@@ -22,7 +22,7 @@ namespace Data.Accounts
 
             using (var context = new ApiRestDbManuelRojasContext())
             {
-                AccountRepository accountRepository = new AccountRepository(context);
+                AccountRepositoryService accountRepository = new AccountRepositoryService(context);
 
                 Cuenta entityCuenta = accountRepository.GetById(id);
 

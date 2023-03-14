@@ -1,5 +1,6 @@
 ﻿using Data.EntityFramework.Entities;
-using Repository;
+using Services;
+using System.Transactions;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
 
@@ -15,22 +16,27 @@ namespace Data.Movements
 
         protected override void Process()
         {
-            using (var context = new ApiRestDbManuelRojasContext())
+            using (var scope = new TransactionScope())//Nueva transacción
             {
-                MovementRepository movementRepository = new MovementRepository(context);
-
-                Movimiento entityMovimiento = new Movimiento
+                using (var context = new ApiRestDbManuelRojasContext())
                 {
-                    IdMovimiento = movementDTO.IdMovimiento,
-                    IdCuenta = movementDTO.IdCuenta,
-                    IdTipoMovimiento = movementDTO.IdTipoMovimiento,
-                    Valor = movementDTO.Valor,
-                    FechaMovimiento = movementDTO.FechaMovimiento,
-                    SaldoDisponible = movementDTO.SaldoDisponible,
-                    Estado = movementDTO.Estado
-                };
+                    MovementRepositoryService movementRepository = new MovementRepositoryService(context);
 
-                movementRepository.Add(entityMovimiento);               
+                    Movimiento entityMovimiento = new Movimiento
+                    {
+                        IdMovimiento = movementDTO.IdMovimiento,
+                        IdCuenta = movementDTO.IdCuenta,
+                        IdTipoMovimiento = movementDTO.IdTipoMovimiento,
+                        Valor = movementDTO.Valor,
+                        FechaMovimiento = movementDTO.FechaMovimiento,
+                        SaldoDisponible = movementDTO.SaldoDisponible,
+                        Estado = movementDTO.Estado
+                    };
+
+                    movementRepository.Add(entityMovimiento);
+                }
+
+                scope.Complete();
             }
         }
     }

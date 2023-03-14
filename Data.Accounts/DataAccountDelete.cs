@@ -1,5 +1,6 @@
 ﻿using Data.EntityFramework.Entities;
-using Repository;
+using Services;
+using System.Transactions;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
 
@@ -16,27 +17,32 @@ namespace Data.Accounts
 
         protected override void Process()
         {
-            using (var context = new ApiRestDbManuelRojasContext())
+            using (var scope = new TransactionScope())//Nueva transacción
             {
-                AccountRepository accountRepository = new AccountRepository(context);
-
-                Cuenta entityCuenta = accountRepository.GetById(id);
-
-                if (entityCuenta != null)
+                using (var context = new ApiRestDbManuelRojasContext())
                 {
-                    //Solo borrado lógico
-                    entityCuenta.Estado = false;
-                    accountRepository.Update(entityCuenta);
+                    AccountRepositoryService accountRepository = new AccountRepositoryService(context);
 
-                    //Opción para borrado definitivo.
-                    //accountRepository.Remove(id);
+                    Cuenta entityCuenta = accountRepository.GetById(id);
 
-                    SetResponseResult(ACCOUNT_MESSAGES.CUENTA_ELIMINADA);
+                    if (entityCuenta != null)
+                    {
+                        //Solo borrado lógico
+                        entityCuenta.Estado = false;
+                        accountRepository.Update(entityCuenta);
+
+                        //Opción para borrado definitivo.
+                        //accountRepository.Remove(id);
+
+                        SetResponseResult(ACCOUNT_MESSAGES.CUENTA_ELIMINADA);
+                    }
+                    else
+                    {
+                        SetException(EXCEPTION_MESSAGES.CUENTA_NO_EXISTE);
+                    }
                 }
-                else
-                {
-                    SetException(EXCEPTION_MESSAGES.CUENTA_NO_EXISTE);
-                }
+
+                scope.Complete();
             }
         }
     }

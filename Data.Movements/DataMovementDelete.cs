@@ -1,5 +1,6 @@
 ﻿using Data.EntityFramework.Entities;
-using Repository;
+using Services;
+using System.Transactions;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
 
@@ -16,25 +17,30 @@ namespace Data.Movements
 
         protected override void Process()
         {
-            using (var context = new ApiRestDbManuelRojasContext())
+            using (var scope = new TransactionScope())//Nueva transacción
             {
-                MovementRepository movementRepository = new MovementRepository(context);
-
-                Movimiento entityMovimiento = movementRepository.GetById(id);
-
-                if (entityMovimiento != null)
+                using (var context = new ApiRestDbManuelRojasContext())
                 {
-                    //Solo borrado lógico
-                    entityMovimiento.Estado = false;
-                    movementRepository.Update(entityMovimiento);
+                    MovementRepositoryService movementRepository = new MovementRepositoryService(context);
 
-                    //Opción para borrado definitivo.
-                    //movementRepository.Remove(id);
+                    Movimiento entityMovimiento = movementRepository.GetById(id);
+
+                    if (entityMovimiento != null)
+                    {
+                        //Solo borrado lógico
+                        entityMovimiento.Estado = false;
+                        movementRepository.Update(entityMovimiento);
+
+                        //Opción para borrado definitivo.
+                        //movementRepository.Remove(id);
+                    }
+                    else
+                    {
+                        SetException(EXCEPTION_MESSAGES.MOVIMIENTO_NO_EXISTE);
+                    }
                 }
-                else
-                {
-                    SetException(EXCEPTION_MESSAGES.MOVIMIENTO_NO_EXISTE);
-                }
+
+                scope.Complete();
             }
         }
     }

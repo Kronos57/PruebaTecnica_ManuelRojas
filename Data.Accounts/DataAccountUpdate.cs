@@ -1,5 +1,6 @@
 ﻿using Data.EntityFramework.Entities;
-using Repository;
+using Services;
+using System.Transactions;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
@@ -16,27 +17,32 @@ namespace Data.Accounts
 
         protected override void Process()
         {
-            using (var context = new ApiRestDbManuelRojasContext())
+            using (var scope = new TransactionScope())//Nueva transacción
             {
-                AccountRepository accountRepository = new AccountRepository(context);
-
-                Cuenta entityCuenta = accountRepository.GetById(accountDTO.IdCuenta);
-
-                if (entityCuenta != null)
+                using (var context = new ApiRestDbManuelRojasContext())
                 {
-                    entityCuenta.IdCliente = accountDTO.IdCliente;
-                    entityCuenta.NumeroCuenta = accountDTO.NumeroCuenta;
-                    entityCuenta.IdTipoCuenta = accountDTO.IdTipoCuenta;
-                    entityCuenta.SaldoInicial = accountDTO.SaldoInicial;
-                    entityCuenta.Estado = accountDTO.Estado;
+                    AccountRepositoryService accountRepository = new AccountRepositoryService(context);
 
-                    accountRepository.Update(entityCuenta);
-                    SetResponseResult(ACCOUNT_MESSAGES.CUENTA_ACTUALIZADA);
+                    Cuenta entityCuenta = accountRepository.GetById(accountDTO.IdCuenta);
+
+                    if (entityCuenta != null)
+                    {
+                        entityCuenta.IdCliente = accountDTO.IdCliente;
+                        entityCuenta.NumeroCuenta = accountDTO.NumeroCuenta;
+                        entityCuenta.IdTipoCuenta = accountDTO.IdTipoCuenta;
+                        entityCuenta.SaldoInicial = accountDTO.SaldoInicial;
+                        entityCuenta.Estado = accountDTO.Estado;
+
+                        accountRepository.Update(entityCuenta);
+                        SetResponseResult(ACCOUNT_MESSAGES.CUENTA_ACTUALIZADA);
+                    }
+                    else
+                    {
+                        SetException(EXCEPTION_MESSAGES.CUENTA_NO_EXISTE);
+                    }
                 }
-                else
-                {
-                    SetException(EXCEPTION_MESSAGES.CUENTA_NO_EXISTE);
-                }
+
+                scope.Complete();
             }
         }
     }

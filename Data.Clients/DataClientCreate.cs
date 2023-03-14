@@ -1,5 +1,6 @@
 ﻿using Data.EntityFramework.Entities;
-using Repository;
+using Services;
+using System.Transactions;
 using Transversal.Entities.DTO;
 using Transversal.Strategy;
 using static Transversal.Entities.ConstantMessages;
@@ -16,38 +17,43 @@ namespace Data.Clients
 
         protected override void Process()
         {
-            using (var context = new ApiRestDbManuelRojasContext())
+            using (var scope = new TransactionScope())//Nueva transacción
             {
-                ClientRepository clientRepository = new ClientRepository(context);
-                PersonRepository personRepository = new PersonRepository(context);
-
-                Persona entityPersona = new Persona
+                using (var context = new ApiRestDbManuelRojasContext())
                 {
-                    IdPersona = clientDTO.IdPersona,
-                    Nombre = clientDTO.Nombre,
-                    IdTipoIdentificacion = clientDTO.IdTipoIdentificacion,
-                    Identificacion = clientDTO.Identificacion != null ? clientDTO.Identificacion : VALIDATION_MESSAGES.DEFAULT_VALUE,
-                    IdGenero = clientDTO.IdGenero,
-                    Edad = clientDTO.Edad,
-                    Direccion = clientDTO.Direccion,
-                    Telefono = clientDTO.Telefono
-                };
+                    ClientRepositoryService clientRepository = new ClientRepositoryService(context);
+                    PersonRepositoryService personRepository = new PersonRepositoryService(context);
 
-                personRepository.Add(entityPersona);
-                context.SaveChanges();
+                    Persona entityPersona = new Persona
+                    {
+                        IdPersona = clientDTO.IdPersona,
+                        Nombre = clientDTO.Nombre,
+                        IdTipoIdentificacion = clientDTO.IdTipoIdentificacion,
+                        Identificacion = clientDTO.Identificacion != null ? clientDTO.Identificacion : VALIDATION_MESSAGES.DEFAULT_VALUE,
+                        IdGenero = clientDTO.IdGenero,
+                        Edad = clientDTO.Edad,
+                        Direccion = clientDTO.Direccion,
+                        Telefono = clientDTO.Telefono
+                    };
 
-                int newIdPerson = entityPersona.IdPersona;
+                    personRepository.Add(entityPersona);
+                    context.SaveChanges();
 
-                Cliente entityCliente = new Cliente
-                {
-                    IdCliente = clientDTO.IdCliente,
-                    IdPersona= newIdPerson,
-                    Contrasenia = clientDTO.Contrasenia != null ? clientDTO.Contrasenia : VALIDATION_MESSAGES.DEFAULT_VALUE,
-                    Estado = clientDTO.Estado,
-                };
+                    int newIdPerson = entityPersona.IdPersona;
 
-                clientRepository.Add(entityCliente);
-                SetResponseResult(CLIENT_MESSAGES.CLIENTE_CREADO);
+                    Cliente entityCliente = new Cliente
+                    {
+                        IdCliente = clientDTO.IdCliente,
+                        IdPersona = newIdPerson,
+                        Contrasenia = clientDTO.Contrasenia != null ? clientDTO.Contrasenia : VALIDATION_MESSAGES.DEFAULT_VALUE,
+                        Estado = clientDTO.Estado,
+                    };
+
+                    clientRepository.Add(entityCliente);
+                    SetResponseResult(CLIENT_MESSAGES.CLIENTE_CREADO);
+                }
+
+                scope.Complete();
             }
         }
     }
