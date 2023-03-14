@@ -10,49 +10,83 @@ namespace Api.Controllers
     [ApiController]
     public class MovementController : ControllerBase
     {
+        private readonly ILogger<MovementController> _logger;
+
+        public MovementController(ILogger<MovementController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet("GetAll")]
         public ActionResult<IEnumerable<MovementSearchDTO>> GetAll()
         {
-            DataMovementGetList dataMovementGetList = new DataMovementGetList();
+            try
+            {
+                DataMovementGetList dataMovementGetList = new DataMovementGetList();
 
-            if (dataMovementGetList.Execute() == StateStrategy.Success)
-            {
-                return Ok(dataMovementGetList.Result);
+                if (dataMovementGetList.Execute() == StateStrategy.Success)
+                {
+                    _logger.LogInformation("Consultando todos los Movimientos");
+                    return Ok(dataMovementGetList.Result);
+                }
+                else
+                {
+                    return BadRequest(dataMovementGetList.GetException());
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest(dataMovementGetList.GetException());
-            }
+                _logger.LogError("Error al consultar los Movimientos: " + ex.Message.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }           
         }
 
         [HttpGet("GetById")]
         public ActionResult<IEnumerable<MovementSearchDTO>> GetById(int id)
         {
-            DataMovementGetById dataMovementGetById = new DataMovementGetById(id);
+            try
+            {
+                DataMovementGetById dataMovementGetById = new DataMovementGetById(id);
 
-            if (dataMovementGetById.Execute() == StateStrategy.Success)
-            {
-                return Ok(dataMovementGetById.Result);
+                if (dataMovementGetById.Execute() == StateStrategy.Success)
+                {
+                    _logger.LogInformation("Consultando el Movimiento con Id: " + id);
+                    return Ok(dataMovementGetById.Result);
+                }
+                else
+                {
+                    return BadRequest(dataMovementGetById.GetException());
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest(dataMovementGetById.GetException());
-            }
+                _logger.LogError("Error al consultar el Movimiento con Id: " + id + ". Error: " + ex.Message.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }            
         }
 
         [HttpPost("Create")]
         public ActionResult Create(MovementDTO movementDTO)
         {
-            BusinessMovementValidateCreate businessCreditMovement = new BusinessMovementValidateCreate(movementDTO);
+            try
+            {
+                BusinessMovementValidateCreate businessCreditMovement = new BusinessMovementValidateCreate(movementDTO);
 
-            if (businessCreditMovement.Execute() == StateStrategy.Success)
-            {
-                return Ok(businessCreditMovement.Result);
+                if (businessCreditMovement.Execute() == StateStrategy.Success)
+                {
+                    _logger.LogInformation("Creando el Movimiento para la cuenta con Id: " + movementDTO.IdCuenta);
+                    return Ok(businessCreditMovement.Result);
+                }
+                else
+                {
+                    return BadRequest(businessCreditMovement.GetException());
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest(businessCreditMovement.GetException());
-            }
+                _logger.LogError("Error al crear el Movimiento: " + ex.Message.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }         
         }       
     }
 }
