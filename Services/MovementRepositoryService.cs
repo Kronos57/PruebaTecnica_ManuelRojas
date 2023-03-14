@@ -1,13 +1,14 @@
 ﻿using Data.EntityFramework.Entities;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 
-namespace Repository
+namespace Services
 {
-    public class MovementRepository : IRepository<Movimiento>
+    public class MovementRepositoryService : IMovementRepository
     {
         private readonly ApiRestDbManuelRojasContext _dbContext;
 
-        public MovementRepository(ApiRestDbManuelRojasContext dbContext)
+        public MovementRepositoryService(ApiRestDbManuelRojasContext dbContext)
         {
             _dbContext = dbContext;
         }

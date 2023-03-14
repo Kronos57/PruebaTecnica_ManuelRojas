@@ -1,13 +1,14 @@
 ﻿using Data.EntityFramework.Entities;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 
-namespace Repository
+namespace Services
 {
-    public  class AccountRepository : IRepository<Cuenta>
+    public class AccountRepositoryService : IAccountRepository
     {
         private readonly ApiRestDbManuelRojasContext _dbContext;
 
-        public AccountRepository(ApiRestDbManuelRojasContext dbContext) 
+        public AccountRepositoryService(ApiRestDbManuelRojasContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -43,7 +44,7 @@ namespace Repository
 
         public void Update(Cuenta entity)
         {
-            _dbContext.Entry(entity).State= EntityState.Modified;
+            _dbContext.Entry(entity).State = EntityState.Modified;
             _dbContext.Cuentas.Update(entity);
             _dbContext.SaveChanges();
         }

@@ -1,13 +1,14 @@
 ﻿using Data.EntityFramework.Entities;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 
-namespace Repository
+namespace Services
 {
-    public class ClientRepository : IRepository<Cliente>
+    public class ClientRepositoryService : IClientRepository
     {
         private readonly ApiRestDbManuelRojasContext _dbContext;
 
-        public ClientRepository(ApiRestDbManuelRojasContext dbContext)
+        public ClientRepositoryService(ApiRestDbManuelRojasContext dbContext)
         {
             _dbContext = dbContext;
         }
