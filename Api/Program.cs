@@ -21,9 +21,10 @@ builder.Services.AddControllers();
 //    options.UseSqlServer(conexionString));
 
 //Se agregan la referencias del Patron Repository pero se omite ya que genera error con la capa de Data
-//builder.Services.AddScoped<IRepository<Cuenta>, AccountRepository>();
-//builder.Services.AddScoped<IRepository<Cliente>, ClientRepository>();
-//builder.Services.AddScoped<IRepository<Movimiento>, MovementRepository>();
+//builder.Services.AddScoped<IAccountRepository, AccountRepositoryService>();
+//builder.Services.AddScoped<IClientRepository, ClientRepositoryService>();
+//builder.Services.AddScoped<IMovementRepository, MovementRepositoryService>();
+//builder.Services.AddScoped<IPersonRepository, PersonRepositoryService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
